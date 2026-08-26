@@ -1,6 +1,0 @@
-venv/
-__pycache__/
-*.pyc
-lambda-function.zip
-fake-event.json
-fake-response.json
