@@ -1,0 +1,20 @@
+
+Customer: I need to report a bug. The checkout page crashes when I try to pay. Please ask me for any missing details before filing a report.
+Assistant: <thinking> The customer has reported a bug with the checkout page crashing during payment. I need to gather more details to file a bug report. First, I will ask for the steps to reproduce the problem. </thinking>
+What steps reproduce the problem?
+[stop reason] end_turn
+
+Customer: To reproduce it: add an item to the cart, enter card details, and click Place order. The page crashes.
+Assistant: <thinking> The customer has provided the steps to reproduce the problem. Next, I need to ask for the environment details to complete the bug report. </thinking>
+What browser, operating system, and device were you using?
+[stop reason] end_turn
+
+Customer: My environment is Chrome 126 on Windows 11 on a laptop.
+Assistant: <thinking> The customer has provided all the necessary details to file a bug report. I will now call the create_bug_report tool with the provided parameters. </thinking>
+
+[tool call] bugreports___create_bug_report
+[stop reason] tool_use
+[tool result] {"ticketId":"d51d07dc-3421-4f74-b59b-a9906156d1d8","status":"OPEN"}
+[stop reason] tool_resultThank you for the details. Your bug report has been filed with ticket ID d51d07dc-3421-4f74-b59b-a9906156d1d8. We'll look into this issue. If you need further assistance, please call our human support team at 1-800-555-0199.
+[stop reason] end_turn
+[tool input] {"environment":"Chrome 126 on Windows 11 on a laptop.","description":"The checkout page crashes when I try to pay.","stepsToReproduce":"add an item to the cart, enter card details, and click Place order. The page crashes."}

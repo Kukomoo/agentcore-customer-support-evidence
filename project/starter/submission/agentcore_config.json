@@ -1,0 +1,9 @@
+{
+  "gatewayArn": "arn:aws:bedrock-agentcore:us-east-1:972881187492:gateway/bug-report-gateway-ctgh2lwsmp",
+  "gatewayId": "bug-report-gateway-ctgh2lwsmp",
+  "gatewayUrl": "https://bug-report-gateway-ctgh2lwsmp.gateway.bedrock-agentcore.us-east-1.amazonaws.com/mcp",
+  "region": "us-east-1",
+  "gatewayTargetId": "LNOJ83OTEY",
+  "lambdaArn": "arn:aws:lambda:us-east-1:972881187492:function:create-bug-report-a13aaaf0",
+  "gatewayRoleArn": "arn:aws:iam::972881187492:role/bug-report-agentcore-gateway-role"
+}

@@ -1,0 +1,48 @@
+HARNESS
+{
+  "harnessId": "bug_report_support_harness-ZCQs4I4T3P",
+  "harnessName": "bug_report_support_harness",
+  "arn": "arn:aws:bedrock-agentcore:us-east-1:972881187492:harness/bug_report_support_harness-ZCQs4I4T3P",
+  "status": "READY",
+  "harnessVersion": "5",
+  "model": {
+    "bedrockModelConfig": {
+      "modelId": "amazon.nova-pro-v1:0",
+      "maxTokens": 1024,
+      "temperature": 0.0,
+      "apiFormat": "converse_stream"
+    }
+  },
+  "tools": [
+    {
+      "type": "agentcore_gateway",
+      "name": "bugreports",
+      "config": {
+        "agentCoreGateway": {
+          "gatewayArn": "arn:aws:bedrock-agentcore:us-east-1:972881187492:gateway/bug-report-gateway-ctgh2lwsmp",
+          "outboundAuth": {
+            "awsIam": {}
+          }
+        }
+      }
+    }
+  ],
+  "memory": {
+    "managedMemoryConfiguration": {
+      "arn": "arn:aws:bedrock-agentcore:us-east-1:972881187492:memory/bug_report_support_harness-fbBsTGAFTv"
+    }
+  }
+}
+
+GATEWAY TARGETS
+[
+  {
+    "targetId": "LNOJ83OTEY",
+    "name": "bugreports",
+    "status": "READY",
+    "description": "Bug report Lambda tool target",
+    "createdAt": "2026-08-26 00:04:26.792874+00:00",
+    "updatedAt": "2026-08-26 00:04:27.550883+00:00",
+    "targetType": "LAMBDA"
+  }
+]

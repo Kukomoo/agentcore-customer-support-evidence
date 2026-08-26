@@ -1,0 +1,22 @@
+{
+    "Item": {
+        "environment": {
+            "S": "Chrome 126 on Windows 11 on a laptop."
+        },
+        "createdAt": {
+            "S": "2026-08-26T00:47:21.776435+00:00"
+        },
+        "stepsToReproduce": {
+            "S": "add an item to the cart, enter card details, and click Place order. The page crashes."
+        },
+        "description": {
+            "S": "The checkout page crashes when I try to pay."
+        },
+        "ticketId": {
+            "S": "d51d07dc-3421-4f74-b59b-a9906156d1d8"
+        },
+        "status": {
+            "S": "OPEN"
+        }
+    }
+}

@@ -1,0 +1,82 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: IAM roles for the AgentCore customer-support chatbot
+
+Parameters:
+  BugReportLambdaArn:
+    Type: String
+    Description: ARN of the existing create_bug_report Lambda function
+
+Resources:
+  AgentCoreGatewayRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: bug-report-agentcore-gateway-role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: bedrock-agentcore.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: InvokeBugReportLambda
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - lambda:InvokeFunction
+                Resource: !Ref BugReportLambdaArn
+
+  AgentCoreHarnessRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: bug-report-agentcore-harness-role
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: bedrock-agentcore.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: InvokeNovaPro
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:InvokeModelWithResponseStream
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/us.amazon.nova-pro-v1:0"
+                  - !Sub "arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.nova-pro-v1:0"
+
+        - PolicyName: InvokeAgentCoreGateway
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock-agentcore:InvokeGateway
+                Resource: "*"
+
+        - PolicyName: AccessAgentCoreManagedMemory
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock-agentcore:CreateEvent
+                  - bedrock-agentcore:ListEvents
+                  - bedrock-agentcore:GetEvent
+                Resource: !Sub "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:memory/*"
+
+Outputs:
+  AgentCoreGatewayRoleArn:
+    Description: IAM role used by AgentCore Gateway
+    Value: !GetAtt AgentCoreGatewayRole.Arn
+
+  AgentCoreHarnessRoleArn:
+    Description: IAM role used by AgentCore Harness
+    Value: !GetAtt AgentCoreHarnessRole.Arn
